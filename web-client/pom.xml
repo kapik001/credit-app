@@ -18,6 +18,7 @@
         <jpro.version>2020.1.0</jpro.version>
         <google.guice.version>4.2.3</google.guice.version>
         <jmetro.version>11.6.12</jmetro.version>
+        <jersey.client.version>2.25.1</jersey.client.version>
     </properties>
 
     <build>
@@ -95,19 +96,19 @@
             <version>${google.guice.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.jfxtras</groupId>
-            <artifactId>jmetro</artifactId>
-            <version>${jmetro.version}</version>
+            <groupId>com.jfoenix</groupId>
+            <artifactId>jfoenix</artifactId>
+            <version>9.0.10</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-client</artifactId>
-            <version>2.25.1</version>
+            <version>${jersey.client.version}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-json-jackson</artifactId>
-            <version>2.25.1</version>
+            <version>${jersey.client.version}</version>
         </dependency>
     </dependencies>
 

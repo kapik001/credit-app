@@ -9,8 +9,8 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public void login(String login, String password) {
         Client client = ClientBuilder.newClient();
-        client.target("http://localhost:8082/" + login + "/" + password)
+        client.target("http://127.0.0.1:8081/loginintoapplication/" + login + "/" + password)
                 .request(MediaType.APPLICATION_JSON)
-                .get(Object.class);
+                .get(Boolean.class);
     }
 }

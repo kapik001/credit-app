@@ -1,4 +1,4 @@
-package com.kapusta.webapp;
+package com.kapusta.webapp.configuration;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

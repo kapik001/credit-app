@@ -1,4 +1,4 @@
-package com.kapusta.webapp;
+package com.kapusta.webapp.configuration;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.TypeLiteral;
