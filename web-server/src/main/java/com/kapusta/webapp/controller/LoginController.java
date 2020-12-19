@@ -9,7 +9,6 @@ public class LoginController {
 
     @RequestMapping(value = "loginintoapplication/{login}/{password}")
     public Boolean login(@PathVariable String login,@PathVariable String password){
-        System.out.println(login + " " + password);
-        return true;
+        return ("admin".equals(login) && "admin".equals(password));
     }
 }
