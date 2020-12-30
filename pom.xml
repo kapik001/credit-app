@@ -11,6 +11,7 @@
     <modules>
         <module>web-client</module>
         <module>web-server</module>
+        <module>web-contract</module>
     </modules>
 
 

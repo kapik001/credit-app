@@ -1,35 +1,45 @@
 package com.kapusta.webapp.service;
 
+import com.google.inject.Inject;
+import com.kapusta.webapp.dto.LoginDataDTO;
+import com.kapusta.webapp.dto.LoginResponseDTO;
 import com.kapusta.webapp.utils.WebClientLogger;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.InvocationCallback;
 import javax.ws.rs.core.MediaType;
-import java.util.List;
-import java.util.Observable;
+
+import java.util.concurrent.Future;
 import java.util.function.Consumer;
 
 
-public class LoginServiceImpl extends Observable implements LoginService {
+public class LoginServiceImpl implements LoginService {
+
+    @Inject
+    private PropertiesRepository propertiesRepository;
 
     @Override
-    public void login(String login, String password) {
+    public void login(LoginDataDTO loginDataDTO, Consumer<Boolean> atResponse, Consumer<Throwable> atError) {
         Client client = ClientBuilder.newClient();
-        client.target("http://127.0.0.1:8081/loginintoapplication/" + login + "/" + password)
+        Future<LoginResponseDTO> res = client.target(propertiesRepository.getRemoteWebServerUrl())
+                .path("login-into-application")
                 .request(MediaType.APPLICATION_JSON)
                 .async()
-                .get(new InvocationCallback<Boolean>() {
+                .post(Entity.entity(loginDataDTO, MediaType.APPLICATION_JSON), new InvocationCallback<LoginResponseDTO>() {
                     @Override
-                    public void completed(Boolean aBoolean) {
-                        setChanged();
-                        notifyObservers(aBoolean);
+                    public void completed(LoginResponseDTO loginResponseDTO) {
+                        atResponse.accept(loginResponseDTO.getResult());
+                        client.close();
                     }
 
                     @Override
                     public void failed(Throwable throwable) {
-                        WebClientLogger.logError("Problem during login into application", throwable);
+                        atError.accept(throwable);
+                        client.close();
                     }
                 });
+
     }
 }

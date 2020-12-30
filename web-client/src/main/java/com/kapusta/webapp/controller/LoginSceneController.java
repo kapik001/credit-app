@@ -2,6 +2,7 @@ package com.kapusta.webapp.controller;
 
 import com.google.inject.Inject;
 import com.kapusta.webapp.configuration.AbleToInit;
+import com.kapusta.webapp.dto.LoginDataDTO;
 import com.kapusta.webapp.fxmlutils.PresentedBy;
 import com.kapusta.webapp.service.LoginService;
 import javafx.fxml.FXML;
@@ -11,7 +12,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 @PresentedBy("scene-templates/login-scene.fxml")
-public class LoginSceneController implements Observer, AbleToInit {
+public class LoginSceneController {
 
     @Inject
     private LoginService loginService;
@@ -24,16 +25,10 @@ public class LoginSceneController implements Observer, AbleToInit {
 
     @FXML
     private void login() {
-        loginService.login(login.getText(), password.getText());
+        LoginDataDTO loginDataDTO = new LoginDataDTO();
+        loginDataDTO.setLogin(login.getText());
+        loginDataDTO.setPassword(password.getText());
+        loginService.login(loginDataDTO, System.out::println, Throwable::printStackTrace);
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        System.out.println("The result of login is: " + arg);
-    }
-
-    @Override
-    public void onInit() {
-        loginService.addObserver(this);
-    }
 }

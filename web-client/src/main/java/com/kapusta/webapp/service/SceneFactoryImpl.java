@@ -14,6 +14,7 @@ public class SceneFactoryImpl implements SceneFactory {
     @Override
     public Scene factorScene() {
         Scene scene = new Scene(loginSceneHolder.getRoot());
+
         return scene;
     }
 }

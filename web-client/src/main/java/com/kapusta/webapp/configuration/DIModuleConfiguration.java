@@ -8,10 +8,7 @@ import com.google.inject.spi.TypeEncounter;
 import com.google.inject.spi.TypeListener;
 import com.kapusta.webapp.controller.LoginSceneController;
 import com.kapusta.webapp.fxmlutils.FXMLHolder;
-import com.kapusta.webapp.service.LoginService;
-import com.kapusta.webapp.service.LoginServiceImpl;
-import com.kapusta.webapp.service.SceneFactory;
-import com.kapusta.webapp.service.SceneFactoryImpl;
+import com.kapusta.webapp.service.*;
 import com.kapusta.webapp.utils.WebClientLogger;
 
 
@@ -28,6 +25,7 @@ public class DIModuleConfiguration extends AbstractModule {
     private void configureDependencies() {
         bind(SceneFactory.class).to(SceneFactoryImpl.class);
         bind(LoginService.class).to(LoginServiceImpl.class);
+        bind(PropertiesRepository.class).to(PropertiesRepositoryImpl.class);
         bind(new TypeLiteral<FXMLHolder<LoginSceneController>>() {
         }).toProvider(LoginSceneControllerProvider.class);
 

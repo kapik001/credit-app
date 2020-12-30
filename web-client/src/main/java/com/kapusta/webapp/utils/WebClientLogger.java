@@ -7,11 +7,15 @@ public class WebClientLogger {
     private static final Logger logger = Logger.getLogger(WebClientLogger.class.getName());
 
     public static void logError(String error) {
-        logger.log(Level.INFO, error);
+        logger.log(Level.WARNING, error);
     }
 
     public static void logError(String error, Throwable t) {
 
-        logger.log(Level.INFO, error, t);
+        logger.log(Level.WARNING, error, t);
+    }
+
+    public static void logInfo(String info) {
+        logger.log(Level.INFO, info);
     }
 }
