@@ -6,7 +6,7 @@ import com.kapusta.webapp.fxmlutils.FXMLHolder;
 import javafx.scene.Scene;
 
 
-public class SceneFactoryImpl implements SceneFactory {
+public class InitSceneFactoryImpl implements InitSceneFactory {
 
     @Inject
     private FXMLHolder<LoginSceneController> loginSceneHolder;
@@ -14,7 +14,6 @@ public class SceneFactoryImpl implements SceneFactory {
     @Override
     public Scene factorScene() {
         Scene scene = new Scene(loginSceneHolder.getRoot());
-
         return scene;
     }
 }

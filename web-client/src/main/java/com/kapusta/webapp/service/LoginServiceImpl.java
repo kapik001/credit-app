@@ -1,9 +1,14 @@
 package com.kapusta.webapp.service;
 
 import com.google.inject.Inject;
+import com.kapusta.webapp.controller.MainSceneController;
 import com.kapusta.webapp.dto.LoginDataDTO;
 import com.kapusta.webapp.dto.LoginResponseDTO;
+import com.kapusta.webapp.fxmlutils.FXMLHolder;
+import com.kapusta.webapp.rest.clients.LoginClient;
 import com.kapusta.webapp.utils.WebClientLogger;
+import javafx.application.Platform;
+import javafx.scene.Scene;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -13,33 +18,36 @@ import javax.ws.rs.core.MediaType;
 
 import java.util.concurrent.Future;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 
 public class LoginServiceImpl implements LoginService {
 
     @Inject
-    private PropertiesRepository propertiesRepository;
+    private LoginClient loginClient;
+
+    @Inject
+    private FXMLHolder<MainSceneController> mainSceneController;
+
+    @Inject
+    private MainStageHolder mainStageHolder;
 
     @Override
-    public void login(LoginDataDTO loginDataDTO, Consumer<Boolean> atResponse, Consumer<Throwable> atError) {
-        Client client = ClientBuilder.newClient();
-        Future<LoginResponseDTO> res = client.target(propertiesRepository.getRemoteWebServerUrl())
-                .path("login-into-application")
-                .request(MediaType.APPLICATION_JSON)
-                .async()
-                .post(Entity.entity(loginDataDTO, MediaType.APPLICATION_JSON), new InvocationCallback<LoginResponseDTO>() {
-                    @Override
-                    public void completed(LoginResponseDTO loginResponseDTO) {
-                        atResponse.accept(loginResponseDTO.getResult());
-                        client.close();
-                    }
+    public void login(String login, String password, Supplier<Void> atSuccess, Supplier<Void> atError) {
+        LoginDataDTO loginDataDTO = new LoginDataDTO();
+        loginDataDTO.setLogin(login);
+        loginDataDTO.setPassword(password);
+        loginClient.login(loginDataDTO, (res) -> {
+            if (Boolean.TRUE.equals(res.getResult())) {
+                Platform.runLater(() -> mainStageHolder.changeScene(new Scene(mainSceneController.getRoot())));
+                atSuccess.get();
+            } else {
+                atError.get();
+            }
 
-                    @Override
-                    public void failed(Throwable throwable) {
-                        atError.accept(throwable);
-                        client.close();
-                    }
-                });
-
+        }, (throwable) -> {
+            WebClientLogger.logError("Error during login", throwable);
+            atError.get();
+        });
     }
 }

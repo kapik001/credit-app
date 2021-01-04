@@ -5,7 +5,10 @@ import com.kapusta.webapp.configuration.AbleToInit;
 import com.kapusta.webapp.dto.LoginDataDTO;
 import com.kapusta.webapp.fxmlutils.PresentedBy;
 import com.kapusta.webapp.service.LoginService;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 
 import java.util.Observable;
@@ -24,11 +27,25 @@ public class LoginSceneController {
     private TextField password;
 
     @FXML
+    private Label wrongPasswordLabel;
+
+    @FXML
+    private ProgressBar loadingBar;
+
+    @FXML
     private void login() {
-        LoginDataDTO loginDataDTO = new LoginDataDTO();
-        loginDataDTO.setLogin(login.getText());
-        loginDataDTO.setPassword(password.getText());
-        loginService.login(loginDataDTO, System.out::println, Throwable::printStackTrace);
+        wrongPasswordLabel.setVisible(false);
+        loadingBar.setVisible(true);
+        loginService.login(login.getText(), password.getText(), () -> {
+            Platform.runLater(() -> loadingBar.setVisible(false));
+            return null;
+        }, () -> {
+            Platform.runLater(() -> {
+                loadingBar.setVisible(false);
+                wrongPasswordLabel.setVisible(true);
+            });
+            return null;
+        });
     }
 
 }
