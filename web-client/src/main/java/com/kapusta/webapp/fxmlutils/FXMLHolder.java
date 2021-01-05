@@ -17,4 +17,8 @@ public class FXMLHolder<FXML_CONTROLLER> {
     public Parent getRoot(){
         return parent;
     }
+
+    public FXML_CONTROLLER getController() {
+        return controller;
+    }
 }

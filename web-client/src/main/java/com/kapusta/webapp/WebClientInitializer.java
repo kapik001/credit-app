@@ -1,26 +1,38 @@
 package com.kapusta.webapp;
 
 import com.google.inject.Inject;
-import com.kapusta.webapp.service.InitSceneFactory;
+import com.jpro.webapi.WebAPI;
+import com.kapusta.webapp.service.LoginSceneFactory;
 import com.kapusta.webapp.service.MainStageHolder;
-import javafx.application.Platform;
+import com.kapusta.webapp.service.SessionRecoveryService;
+import com.kapusta.webapp.utils.WebClientLogger;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class WebClientInitializer {
 
     @Inject
-    private InitSceneFactory initSceneFactory;
+    private LoginSceneFactory loginSceneFactory;
 
     @Inject
     private MainStageHolder mainStageHolder;
 
-    public void init(Stage stage){
+    @Inject
+    private SessionRecoveryService sessionRecoveryService;
+
+    public void init(Stage stage) {
+
+        mainStageHolder.setStage(stage);
         stage.setTitle("Web client");
-        Scene mainScene = initSceneFactory.factorScene();
-        stage.setScene(mainScene);
+        Scene firstScene = null;
+        if (!sessionRecoveryService.recoverSession()) {
+            firstScene = loginSceneFactory.factorScene();
+        }
+        stage.setScene(firstScene);
         stage.setMaximized(true);
         stage.show();
-        mainStageHolder.setStage(stage);
+
     }
+
+
 }

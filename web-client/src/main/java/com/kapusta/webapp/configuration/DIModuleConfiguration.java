@@ -11,6 +11,8 @@ import com.kapusta.webapp.controller.MainSceneController;
 import com.kapusta.webapp.fxmlutils.FXMLHolder;
 import com.kapusta.webapp.rest.clients.LoginClient;
 import com.kapusta.webapp.rest.clients.LoginClientImpl;
+import com.kapusta.webapp.rest.clients.UserClient;
+import com.kapusta.webapp.rest.clients.UserClientImpl;
 import com.kapusta.webapp.service.*;
 import com.kapusta.webapp.utils.WebClientLogger;
 
@@ -26,25 +28,36 @@ public class DIModuleConfiguration extends AbstractModule {
     }
 
     private void configureDependencies() {
-        bind(InitSceneFactory.class).to(InitSceneFactoryImpl.class);
+        bindBasicDependencies();
+        bindControllerDependencies();
+        bindListeners();
+    }
+
+    private void bindBasicDependencies() {
+        bind(LoginSceneFactory.class).to(LoginSceneFactoryImpl.class);
         bind(LoginService.class).to(LoginServiceImpl.class);
         bind(PropertiesRepository.class).to(PropertiesRepositoryImpl.class);
         bind(MainStageHolder.class).to(MainStageHolderImpl.class);
         bind(LoginClient.class).to(LoginClientImpl.class);
+        bind(SessionRecoveryService.class).to(SessionRecoveryServiceImpl.class);
+        bind(MainSceneService.class).to(MainSceneServiceImpl.class);
+        bind(UserClient.class).to(UserClientImpl.class);
+    }
+
+    private void bindControllerDependencies() {
         bind(new TypeLiteral<FXMLHolder<LoginSceneController>>() {
         }).toProvider(LoginSceneControllerProvider.class);
         bind(new TypeLiteral<FXMLHolder<MainSceneController>>() {
         }).toProvider(MainSceneControllerProvider.class);
+    }
 
+    private void bindListeners() {
         bindListener(Matchers.any(), new TypeListener() {
             @Override
             public <I> void hear(final TypeLiteral<I> typeLiteral, TypeEncounter<I> typeEncounter) {
-                typeEncounter.register(new InjectionListener<I>() {
-                    @Override
-                    public void afterInjection(Object i) {
-                        if (i instanceof AbleToInit) {
-                            ((AbleToInit) i).onInit();
-                        }
+                typeEncounter.register((InjectionListener<I>) i -> {
+                    if (i instanceof AbleToInit) {
+                        ((AbleToInit) i).onInit();
                     }
                 });
             }

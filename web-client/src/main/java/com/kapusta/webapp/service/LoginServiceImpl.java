@@ -27,10 +27,10 @@ public class LoginServiceImpl implements LoginService {
     private LoginClient loginClient;
 
     @Inject
-    private FXMLHolder<MainSceneController> mainSceneController;
+    private MainSceneService mainSceneService;
 
     @Inject
-    private MainStageHolder mainStageHolder;
+    private SessionRecoveryService sessionRecoveryService;
 
     @Override
     public void login(String login, String password, Supplier<Void> atSuccess, Supplier<Void> atError) {
@@ -39,7 +39,8 @@ public class LoginServiceImpl implements LoginService {
         loginDataDTO.setPassword(password);
         loginClient.login(loginDataDTO, (res) -> {
             if (Boolean.TRUE.equals(res.getResult())) {
-                Platform.runLater(() -> mainStageHolder.changeScene(new Scene(mainSceneController.getRoot())));
+                sessionRecoveryService.rememberSession("XXx");
+                mainSceneService.init();
                 atSuccess.get();
             } else {
                 atError.get();

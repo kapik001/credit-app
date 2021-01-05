@@ -14,6 +14,7 @@ public class PropertiesRepositoryImpl implements PropertiesRepository, AbleToIni
 
     private Properties properties;
     private final static String REMOTE_WEB_SERVER_ADDRESS_PROPERTY_NAME = "remote-server-url";
+    private final static String SESSION_COOKIE_PROPERTY_NAME = "session-cookie-name";
 
     @Override
     public void onInit() {
@@ -39,5 +40,10 @@ public class PropertiesRepositoryImpl implements PropertiesRepository, AbleToIni
     @Override
     public String getRemoteWebServerUrl() {
         return properties.getProperty(REMOTE_WEB_SERVER_ADDRESS_PROPERTY_NAME);
+    }
+
+    @Override
+    public String getSessionCookiePropertyName(){
+        return properties.getProperty(SESSION_COOKIE_PROPERTY_NAME);
     }
 }

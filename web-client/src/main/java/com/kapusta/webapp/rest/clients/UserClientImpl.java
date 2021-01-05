@@ -1,36 +1,33 @@
 package com.kapusta.webapp.rest.clients;
 
 import com.google.inject.Inject;
-import com.kapusta.webapp.dto.LoginDataDTO;
 import com.kapusta.webapp.dto.LoginResponseDTO;
+import com.kapusta.webapp.dto.UserDetailsDTO;
 import com.kapusta.webapp.service.PropertiesRepository;
-import javafx.application.Platform;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.InvocationCallback;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.util.concurrent.Future;
 import java.util.function.Consumer;
 
-public class LoginClientImpl implements LoginClient {
+public class UserClientImpl implements UserClient {
 
     @Inject
     private PropertiesRepository propertiesRepository;
 
     @Override
-    public void login(LoginDataDTO loginDataDTO, Consumer<LoginResponseDTO> atResponse, Consumer<Throwable> atError) {
+    public void getUserData(Consumer<UserDetailsDTO> atSuccess, Consumer<Throwable> atError) {
         Client client = ClientBuilder.newClient();
         client.target(propertiesRepository.getRemoteWebServerUrl())
-                .path("login-into-application")
+                .path("user/get")
                 .request(MediaType.APPLICATION_JSON)
                 .async()
-                .post(Entity.entity(loginDataDTO, MediaType.APPLICATION_JSON), new InvocationCallback<LoginResponseDTO>() {
+                .get(new InvocationCallback<UserDetailsDTO>() {
                     @Override
-                    public void completed(LoginResponseDTO loginResponseDTO) {
-                        atResponse.accept(loginResponseDTO);
+                    public void completed(UserDetailsDTO userDetailsDTO) {
+                        atSuccess.accept(userDetailsDTO);
                         client.close();
                     }
 

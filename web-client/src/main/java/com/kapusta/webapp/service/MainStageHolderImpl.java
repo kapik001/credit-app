@@ -1,6 +1,7 @@
 package com.kapusta.webapp.service;
 
 import com.google.inject.Singleton;
+import com.jpro.webapi.WebAPI;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -17,6 +18,15 @@ public class MainStageHolderImpl implements MainStageHolder {
     @Override
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    @Override
+    public WebAPI getWebAPI() {
+        if (stage == null) {
+            return null;
+        } else {
+            return WebAPI.getWebAPI(stage);
+        }
     }
 
 
