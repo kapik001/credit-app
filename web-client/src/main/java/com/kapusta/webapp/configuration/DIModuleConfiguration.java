@@ -9,10 +9,9 @@ import com.google.inject.spi.TypeListener;
 import com.kapusta.webapp.controller.LoginSceneController;
 import com.kapusta.webapp.controller.MainSceneController;
 import com.kapusta.webapp.fxmlutils.FXMLHolder;
-import com.kapusta.webapp.rest.clients.LoginClient;
-import com.kapusta.webapp.rest.clients.LoginClientImpl;
-import com.kapusta.webapp.rest.clients.UserClient;
-import com.kapusta.webapp.rest.clients.UserClientImpl;
+import com.kapusta.webapp.rest.ResourceGenerator;
+import com.kapusta.webapp.rest.ResourceGeneratorImpl;
+import com.kapusta.webapp.rest.clients.*;
 import com.kapusta.webapp.service.*;
 import com.kapusta.webapp.utils.WebClientLogger;
 
@@ -42,6 +41,7 @@ public class DIModuleConfiguration extends AbstractModule {
         bind(SessionRecoveryService.class).to(SessionRecoveryServiceImpl.class);
         bind(MainSceneService.class).to(MainSceneServiceImpl.class);
         bind(UserClient.class).to(UserClientImpl.class);
+        bind(ResourceGenerator.class).to(ResourceGeneratorImpl.class);
     }
 
     private void bindControllerDependencies() {

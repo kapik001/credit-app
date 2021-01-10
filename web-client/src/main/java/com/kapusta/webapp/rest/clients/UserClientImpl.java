@@ -1,41 +1,43 @@
 package com.kapusta.webapp.rest.clients;
 
 import com.google.inject.Inject;
-import com.kapusta.webapp.dto.LoginResponseDTO;
 import com.kapusta.webapp.dto.UserDetailsDTO;
-import com.kapusta.webapp.service.PropertiesRepository;
+import com.kapusta.webapp.rest.ResourceGenerator;
+import com.kapusta.webapp.rest.resources.UserResource;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.InvocationCallback;
-import javax.ws.rs.core.MediaType;
 import java.util.function.Consumer;
 
 public class UserClientImpl implements UserClient {
 
     @Inject
-    private PropertiesRepository propertiesRepository;
+    private ResourceGenerator resourceGenerator;
 
     @Override
     public void getUserData(Consumer<UserDetailsDTO> atSuccess, Consumer<Throwable> atError) {
-        Client client = ClientBuilder.newClient();
-        client.target(propertiesRepository.getRemoteWebServerUrl())
-                .path("user/get")
-                .request(MediaType.APPLICATION_JSON)
-                .async()
-                .get(new InvocationCallback<UserDetailsDTO>() {
+        UserResource userResource = resourceGenerator.getResource(UserResource.class);
+        userResource.getUserDetails().enqueue(
+                new Callback<UserDetailsDTO>() {
                     @Override
-                    public void completed(UserDetailsDTO userDetailsDTO) {
-                        atSuccess.accept(userDetailsDTO);
-                        client.close();
+                    public void onResponse(Call<UserDetailsDTO> call, Response<UserDetailsDTO> response) {
+                        if (response.isSuccessful()) {
+                            atSuccess.accept(response.body());
+                        } else {
+                            if (response.errorBody() != null) {
+                                atError.accept(new RestClientException(response.errorBody().toString()));
+                            } else {
+                                atError.accept(new RestClientException("Problem during calling user method"));
+                            }
+                        }
                     }
 
                     @Override
-                    public void failed(Throwable throwable) {
+                    public void onFailure(Call<UserDetailsDTO> call, Throwable throwable) {
                         atError.accept(throwable);
-                        client.close();
                     }
-                });
+                }
+        );
     }
 }

@@ -18,7 +18,9 @@
         <jpro.version>2020.1.0</jpro.version>
         <google.guice.version>4.2.3</google.guice.version>
         <jmetro.version>11.6.12</jmetro.version>
-        <jersey.client.version>2.25.1</jersey.client.version>
+
+        <jfoenix.version>9.0.10</jfoenix.version>
+        <retrofit.version>2.9.0</retrofit.version>
     </properties>
 
     <build>
@@ -99,32 +101,7 @@
         <dependency>
             <groupId>com.jfoenix</groupId>
             <artifactId>jfoenix</artifactId>
-            <version>9.0.10</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
-            <artifactId>jersey-client</artifactId>
-            <version>${jersey.client.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.media</groupId>
-            <artifactId>jersey-media-json-jackson</artifactId>
-            <version>${jersey.client.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.xml.bind</groupId>
-            <artifactId>jakarta.xml.bind-api</artifactId>
-            <version>2.3.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jaxb</groupId>
-            <artifactId>jaxb-runtime</artifactId>
-            <version>2.3.2</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.activation</groupId>
-            <artifactId>activation</artifactId>
-            <version>1.1.1</version>
+            <version>${jfoenix.version}</version>
         </dependency>
         <dependency>
             <groupId>com.kapusta.webapp</groupId>
@@ -132,11 +109,16 @@
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.reflections</groupId>-->
-<!--            <artifactId>reflections</artifactId>-->
-<!--            <version>0.9.12</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.squareup.retrofit2</groupId>
+            <artifactId>retrofit</artifactId>
+            <version>${retrofit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.retrofit2</groupId>
+            <artifactId>converter-gson</artifactId>
+            <version>${retrofit.version}</version>
+        </dependency>
     </dependencies>
 
     <pluginRepositories>
