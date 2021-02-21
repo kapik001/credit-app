@@ -3,13 +3,13 @@ package com.kapusta.webapp.dto;
 import java.io.Serializable;
 
 public class LoginResponseDTO implements Serializable {
-    private Boolean result;
+    private String token;
 
-    public Boolean getResult() {
-        return result;
+    public String getToken() {
+        return token;
     }
 
-    public void setResult(Boolean result) {
-        this.result = result;
+    public void setToken(String token) {
+        this.token = token;
     }
 }

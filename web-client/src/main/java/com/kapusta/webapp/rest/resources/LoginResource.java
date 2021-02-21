@@ -8,6 +8,6 @@ import retrofit2.http.POST;
 
 public interface LoginResource {
 
-    @POST("/login-into-application")
+    @POST("/login")
     Call<LoginResponseDTO> login(@Body LoginDataDTO loginDataDTO);
 }

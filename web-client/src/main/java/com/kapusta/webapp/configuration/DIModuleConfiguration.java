@@ -38,7 +38,7 @@ public class DIModuleConfiguration extends AbstractModule {
         bind(PropertiesRepository.class).to(PropertiesRepositoryImpl.class);
         bind(MainStageHolder.class).to(MainStageHolderImpl.class);
         bind(LoginClient.class).to(LoginClientImpl.class);
-        bind(SessionRecoveryService.class).to(SessionRecoveryServiceImpl.class);
+        bind(TokenRecoveryService.class).to(TokenRecoveryServiceImpl.class);
         bind(MainSceneService.class).to(MainSceneServiceImpl.class);
         bind(UserClient.class).to(UserClientImpl.class);
         bind(ResourceGenerator.class).to(ResourceGeneratorImpl.class);

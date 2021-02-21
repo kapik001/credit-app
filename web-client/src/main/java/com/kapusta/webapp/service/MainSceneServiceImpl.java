@@ -22,8 +22,10 @@ public class MainSceneServiceImpl implements MainSceneService {
     public void init() {
         userClient.getUserData((userData) -> {
             Platform.runLater(() -> mainStageHolder.changeScene(new Scene(mainSceneController.getRoot())));
-            mainSceneController.getController().setUserName(userData.getLogin());
+            mainSceneController.getController().setUserName(userData.getLogin() + " "
+                    + userData.getFirstName() + " " + userData.getLastName());
         }, (t) -> {
+            //TODO logout
             WebClientLogger.logError("Error during retrieving user data", t);
         });
 

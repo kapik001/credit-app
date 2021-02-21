@@ -64,6 +64,25 @@
                     <mainClassName>com.kapusta.webapp.Run</mainClassName>
                     <openingPath>/</openingPath>
                 </configuration>
+                <executions>
+                    <execution>
+                        <!-- Default configuration for running -->
+                        <id>default-cli</id>
+                        <configuration>
+                            <mainClass>com.kapusta.webapp.Run</mainClass>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <!-- Configuration for debugging -->
+                        <id>debug</id>
+                        <configuration>
+                            <options>
+                                <option>-agentlib:jdwp=transport=dt_socket,server=n,address=5006,suspend=y</option>
+                            </options>
+                            <mainClass>com.kapusta.webapp.Run</mainClass>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

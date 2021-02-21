@@ -17,7 +17,7 @@ public class LoginServiceImpl implements LoginService {
     private MainSceneService mainSceneService;
 
     @Inject
-    private SessionRecoveryService sessionRecoveryService;
+    private TokenRecoveryService tokenRecoveryService;
 
     @Override
     public void login(String login, String password, Supplier<Void> atSuccess, Supplier<Void> atError) {
@@ -25,8 +25,8 @@ public class LoginServiceImpl implements LoginService {
         loginDataDTO.setLogin(login);
         loginDataDTO.setPassword(password);
         loginClient.login(loginDataDTO, (res) -> {
-            if (Boolean.TRUE.equals(res.getResult())) {
-                sessionRecoveryService.rememberSession("XXx");
+            if (res.getToken() != null) {
+                tokenRecoveryService.rememberToken(res.getToken());
                 mainSceneService.init();
                 atSuccess.get();
             } else {

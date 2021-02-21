@@ -1,20 +1,9 @@
-package com.kapusta.webapp.dto;
+package com.kapusta.webapp.security.entity;
 
-import java.io.Serializable;
-
-public class UserDetailsDTO implements Serializable {
-    private String login;
+public class UserPrivateData {
     private String firstName;
     private String lastName;
     private String email;
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -39,5 +28,4 @@ public class UserDetailsDTO implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-
 }

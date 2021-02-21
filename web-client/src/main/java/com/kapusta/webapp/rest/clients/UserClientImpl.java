@@ -8,6 +8,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import java.io.IOException;
 import java.util.function.Consumer;
 
 public class UserClientImpl implements UserClient {
@@ -26,7 +27,11 @@ public class UserClientImpl implements UserClient {
                             atSuccess.accept(response.body());
                         } else {
                             if (response.errorBody() != null) {
-                                atError.accept(new RestClientException(response.errorBody().toString()));
+                                try {
+                                    atError.accept(new RestClientException("Problem: " + response.errorBody().string()));
+                                } catch (IOException e) {
+                                    atError.accept(new RestClientException("Error code: " + response.code()));
+                                }
                             } else {
                                 atError.accept(new RestClientException("Problem during calling user method"));
                             }
