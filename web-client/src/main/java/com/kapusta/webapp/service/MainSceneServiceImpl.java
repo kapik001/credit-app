@@ -17,16 +17,19 @@ public class MainSceneServiceImpl implements MainSceneService {
     private MainStageHolder mainStageHolder;
 
     @Inject
+    private LogoutService logoutService;
+
+    @Inject
     private UserClient userClient;
 
     public void init() {
         userClient.getUserData((userData) -> {
-            Platform.runLater(() -> mainStageHolder.changeScene(new Scene(mainSceneController.getRoot())));
+            Platform.runLater(() -> mainStageHolder.changeRoot(mainSceneController.getRoot()));
             mainSceneController.getController().setUserName(userData.getLogin() + " "
                     + userData.getFirstName() + " " + userData.getLastName());
         }, (t) -> {
-            //TODO logout
             WebClientLogger.logError("Error during retrieving user data", t);
+            logoutService.logout();
         });
 
     }

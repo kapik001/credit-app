@@ -3,7 +3,7 @@ package com.kapusta.webapp;
 import com.google.inject.Inject;
 import com.kapusta.webapp.service.LoginSceneFactory;
 import com.kapusta.webapp.service.MainStageHolder;
-import com.kapusta.webapp.service.TokenRecoveryService;
+import com.kapusta.webapp.service.TokenRepositoryService;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -16,15 +16,15 @@ public class WebClientInitializer {
     private MainStageHolder mainStageHolder;
 
     @Inject
-    private TokenRecoveryService tokenRecoveryService;
+    private TokenRepositoryService tokenRepositoryService;
 
     public void init(Stage stage) {
 
         mainStageHolder.setStage(stage);
         stage.setTitle("Web client");
         Scene firstScene = null;
-        if (!tokenRecoveryService.recoverToken()) {
-            firstScene = loginSceneFactory.factorScene();
+        if (!tokenRepositoryService.recoverToken()) {
+            firstScene = new Scene(loginSceneFactory.factorLoginRoot());
         }
         stage.setScene(firstScene);
         stage.setMaximized(true);

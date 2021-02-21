@@ -2,6 +2,7 @@ package com.kapusta.webapp.configuration;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.TypeLiteral;
+import com.google.inject.internal.SingletonScope;
 import com.google.inject.matcher.Matchers;
 import com.google.inject.spi.InjectionListener;
 import com.google.inject.spi.TypeEncounter;
@@ -38,17 +39,18 @@ public class DIModuleConfiguration extends AbstractModule {
         bind(PropertiesRepository.class).to(PropertiesRepositoryImpl.class);
         bind(MainStageHolder.class).to(MainStageHolderImpl.class);
         bind(LoginClient.class).to(LoginClientImpl.class);
-        bind(TokenRecoveryService.class).to(TokenRecoveryServiceImpl.class);
+        bind(TokenRepositoryService.class).to(TokenRepositoryServiceImpl.class);
         bind(MainSceneService.class).to(MainSceneServiceImpl.class);
         bind(UserClient.class).to(UserClientImpl.class);
         bind(ResourceGenerator.class).to(ResourceGeneratorImpl.class);
+        bind(LogoutService.class).to(LogoutServiceImpl.class);
     }
 
     private void bindControllerDependencies() {
         bind(new TypeLiteral<FXMLHolder<LoginSceneController>>() {
-        }).toProvider(LoginSceneControllerProvider.class);
+        }).toProvider(LoginSceneControllerProvider.class).in(new SingletonScope());
         bind(new TypeLiteral<FXMLHolder<MainSceneController>>() {
-        }).toProvider(MainSceneControllerProvider.class);
+        }).toProvider(MainSceneControllerProvider.class).in(new SingletonScope());
     }
 
     private void bindListeners() {

@@ -4,15 +4,11 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.kapusta.webapp.configuration.AbleToInit;
 import com.kapusta.webapp.service.PropertiesRepository;
-import com.kapusta.webapp.service.TokenRecoveryService;
-import okhttp3.Interceptor;
+import com.kapusta.webapp.service.TokenRepositoryService;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import java.io.IOException;
 
 @Singleton
 public class ResourceGeneratorImpl implements ResourceGenerator, AbleToInit {
@@ -20,7 +16,7 @@ public class ResourceGeneratorImpl implements ResourceGenerator, AbleToInit {
     private Retrofit retrofit;
 
     @Inject
-    private TokenRecoveryService tokenRecoveryService;
+    private TokenRepositoryService tokenRepositoryService;
 
     @Inject
     private PropertiesRepository propertiesRepository;
@@ -32,7 +28,7 @@ public class ResourceGeneratorImpl implements ResourceGenerator, AbleToInit {
             Request original = chain.request();
 
             Request request = original.newBuilder()
-                    .header("Authorization", "Bearer " + tokenRecoveryService.getToken())
+                    .header("Authorization", "Bearer " + tokenRepositoryService.getToken())
                     .method(original.method(), original.body())
                     .build();
 

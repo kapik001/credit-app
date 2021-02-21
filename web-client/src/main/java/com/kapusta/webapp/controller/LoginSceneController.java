@@ -1,6 +1,7 @@
 package com.kapusta.webapp.controller;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.kapusta.webapp.configuration.AbleToInit;
 import com.kapusta.webapp.dto.LoginDataDTO;
 import com.kapusta.webapp.fxmlutils.PresentedBy;
@@ -14,6 +15,7 @@ import javafx.scene.control.TextField;
 import java.util.Observable;
 import java.util.Observer;
 
+@Singleton
 @PresentedBy("scene-templates/login-scene.fxml")
 public class LoginSceneController {
 

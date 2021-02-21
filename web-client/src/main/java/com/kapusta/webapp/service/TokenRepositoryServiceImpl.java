@@ -5,7 +5,7 @@ import com.google.inject.Singleton;
 import com.jpro.webapi.WebAPI;
 
 @Singleton
-public class TokenRecoveryServiceImpl implements TokenRecoveryService {
+public class TokenRepositoryServiceImpl implements TokenRepositoryService {
 
     private String tokenId = null;
 
@@ -35,21 +35,27 @@ public class TokenRecoveryServiceImpl implements TokenRecoveryService {
     }
 
     @Override
-    public Boolean rememberToken(String token) {
-        System.out.println(token);
+    public void rememberToken(String token) {
         WebAPI webAPI = mainStageHolder.getWebAPI();
         if (webAPI == null) {
-            return false;
+            return;
         }
-        System.out.println(token);
-
         webAPI.setCookie(propertiesRepository.getSessionCookiePropertyName(), token);
         tokenId = token;
-        return true;
     }
 
     @Override
     public String getToken() {
         return this.tokenId;
+    }
+
+    @Override
+    public void removeToken() {
+        WebAPI webAPI = mainStageHolder.getWebAPI();
+        if (webAPI == null) {
+            return;
+        }
+        webAPI.deleteCookie(propertiesRepository.getSessionCookiePropertyName());
+        tokenId = null;
     }
 }
