@@ -9,6 +9,8 @@ import java.util.Map;
 @Service
 public class UserAuthenticationServiceImpl implements UserAuthenticationService {
 
+    private static final String USER_KEY = "username";
+
     @Autowired
     private UserRepositoryService usersRepo;
 
@@ -19,7 +21,7 @@ public class UserAuthenticationServiceImpl implements UserAuthenticationService 
     public String login(String username, String password) {
         User user = usersRepo.findByLogin(username);
         if (user.getPassword().equals(password)) {
-            return tokenService.expiring(Map.of("username", username));
+            return tokenService.expiring(Map.of(USER_KEY, username));
         } else {
             return null;
         }
@@ -29,7 +31,7 @@ public class UserAuthenticationServiceImpl implements UserAuthenticationService 
     public User findByToken(String token) {
         Map<String, String> loadedFromToken = tokenService.verify(token);
         if (loadedFromToken != null && !loadedFromToken.isEmpty()) {
-            String userName = loadedFromToken.get("username");
+            String userName = loadedFromToken.get(USER_KEY);
             return usersRepo.findByLogin(userName);
         } else {
             return null;

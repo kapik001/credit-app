@@ -16,7 +16,7 @@
          <top>
             <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="38.0" prefWidth="1980.0" style="-fx-background-color: CadetBlue;" BorderPane.alignment="CENTER">
                <children>
-                  <Label fx:id="userName" contentDisplay="RIGHT" layoutX="1128.0" layoutY="9.0" prefHeight="20.0" prefWidth="372.0" textAlignment="RIGHT" textFill="WHITE">
+                  <Label fx:id="userName" contentDisplay="RIGHT" layoutX="14.0" layoutY="10.0" prefHeight="20.0" prefWidth="372.0" textAlignment="RIGHT" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -37,8 +37,32 @@
             </Pane>
          </top>
          <center>
-              <Pane prefHeight="540.0" prefWidth="761.0" BorderPane.alignment="CENTER" />
+              <Pane prefHeight="540.0" prefWidth="761.0" stylesheets="@../stylesheets/menu-dropdown-style.css" BorderPane.alignment="CENTER" />
          </center>
+         <left>
+            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #90bdbf;" BorderPane.alignment="CENTER">
+               <children>
+                  <MenuButton mnemonicParsing="false" popupSide="RIGHT" prefHeight="31.0" prefWidth="199.0" stylesheets="@../stylesheets/left-menu-nav.css" text="OPTIONS" textFill="WHITE">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </MenuButton>
+                  <MenuButton layoutY="31.0" mnemonicParsing="false" popupSide="RIGHT" prefHeight="31.0" prefWidth="199.0" stylesheets="@../stylesheets/left-menu-nav.css" text="OPTIONS 2" textFill="WHITE">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                        <MenuItem mnemonicParsing="false" text="Action 2" />
+                     </items>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </MenuButton>
+               </children>
+            </Pane>
+         </left>
       </BorderPane>
     </children>
 </HBox>

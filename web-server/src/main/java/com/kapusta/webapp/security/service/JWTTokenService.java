@@ -19,7 +19,7 @@ import java.util.function.Supplier;
 public class JWTTokenService implements Clock, TokenService {
 
     private static final GzipCompressionCodec COMPRESSION_CODEC = new GzipCompressionCodec();
-
+    private static final String SIGN_ALGORITHM = "HmacSHA256";
     private final String issuer;
     private final int expirationSec;
     private final int clockSkewSec;
@@ -54,13 +54,13 @@ public class JWTTokenService implements Clock, TokenService {
                 .setAllowedClockSkewSeconds(clockSkewSec)
                 .build();
 
-        final String withoutSignature = substringBeforeLast(token, ".") + ".";
+        final String withoutSignature = extractWithoutSignaturePartFromToken(token) + ".";
         return parseClaims(() -> parser.parseClaimsJwt(withoutSignature).getBody());
     }
 
     @Override
     public Map<String, String> verify(String token) {
-        Key aSecretKey = new SecretKeySpec(this.secretKey.getBytes(), "HmacSHA256");
+        Key aSecretKey = new SecretKeySpec(this.secretKey.getBytes(), SIGN_ALGORITHM);
         final JwtParser parser = Jwts.parserBuilder()
                 .requireIssuer(issuer)
                 .setClock(this)
@@ -84,7 +84,7 @@ public class JWTTokenService implements Clock, TokenService {
             claims.setExpiration(calendar.getTime());
         }
         claims.putAll(attributes);
-        Key aSecretKey = new SecretKeySpec(this.secretKey.getBytes(), "HmacSHA256");
+        Key aSecretKey = new SecretKeySpec(this.secretKey.getBytes(), SIGN_ALGORITHM);
         return Jwts
                 .builder()
                 .setClaims(claims)
@@ -111,9 +111,9 @@ public class JWTTokenService implements Clock, TokenService {
         }
     }
 
-    private String substringBeforeLast(String origin, String delimeter) {
+    private String extractWithoutSignaturePartFromToken(String origin) {
         try {
-            String[] parts = origin.split(delimeter);
+            String[] parts = origin.split(".");
             return parts[parts.length - 2];
         } catch (IndexOutOfBoundsException e) {
             return "";

@@ -39,7 +39,12 @@ public class LoginSceneController {
         wrongPasswordLabel.setVisible(false);
         loadingBar.setVisible(true);
         loginService.login(login.getText(), password.getText(), () -> {
-            Platform.runLater(() -> loadingBar.setVisible(false));
+            Platform.runLater(() -> {
+                loadingBar.setVisible(false);
+                login.setText("");
+                password.setText("");
+            });
+
             return null;
         }, () -> {
             Platform.runLater(() -> {

@@ -1,0 +1,70 @@
+* {
+    -fx-my-menu-color: #90bdbf;
+    -fx-my-menu-color-highlighted: #455a64;
+    -fx-my-menu-color-option: #7193a3;
+    -fx-my-menu-color-option-focused: #506670;
+    -fx-my-menu-font-color: white;
+    -fx-my-menu-font-color-highlighted: white;
+}
+
+
+.menu-button > .arrow-button {
+    -fx-padding: 0;
+}
+
+.menu-button > .arrow-button > .arrow {
+    -fx-padding: 0;
+}
+
+.menu-button {
+    -fx-background-color: -fx-my-menu-color-option;
+    -fx-background-radius: 0 2 2 0, 0 1 1 0;
+}
+
+.menu-button:hover, .menu-button:focused {
+        -fx-background-color: -fx-my-menu-color-option-focused;
+        -fx-background-insets: 0 0 -1 0, 0;
+        -fx-background-radius: 3, 3;
+}
+
+.menu-button:hover label, .menu-button:focused label {
+        -fx-background-color: -fx-my-menu-color-option-focused;
+
+}
+
+.menu-button .arrow {
+    -fx-background-color: white;
+    }
+
+
+
+
+.menu-item {
+    -fx-background-color: -fx-my-menu-color;
+}
+
+/*** The item's label (not hovered / focused) ***/
+.menu-item .label {
+    -fx-text-fill: -fx-my-menu-font-color;
+}
+
+/*** The item's label (disabled) ***/
+.menu-item .label:disabled {
+    -fx-opacity: 1.0;
+}
+
+/*** The item itself (hovered / focused) ***/
+.menu-item:focused, .menu-item:hovered {
+    -fx-background-color: -fx-my-menu-color-highlighted;
+}
+
+/*** The item's label (hovered / focused) ***/
+.menu-item:focused .label, .menu-item:hovered .label {
+    -fx-text-fill: -fx-my-menu-font-color-highlighted;
+}
+
+/* CONTEXT MENU */
+/*** The context menu that contains a menu's menu items ***/
+.context-menu {
+    -fx-background-color: -fx-my-menu-color;
+}
