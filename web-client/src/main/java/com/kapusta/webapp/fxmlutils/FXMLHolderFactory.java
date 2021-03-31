@@ -26,6 +26,7 @@ public class FXMLHolderFactory {
             }
             return new FXMLHolder<>(controller, loader, root);
         } catch (Throwable t) {
+            t.printStackTrace();
             throw new FXMLHolderConfigurationException("Impossible to create FXMLHolder for {" + controller.getClass().getName() + "}," +
                     " recheck configuration");
         }

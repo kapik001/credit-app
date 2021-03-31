@@ -22,11 +22,14 @@ public class MainSceneServiceImpl implements MainSceneService {
     @Inject
     private UserClient userClient;
 
+    @Inject
+    private UserContextHolder userContextHolder;
+
     public void init() {
         userClient.getUserData((userData) -> {
             Platform.runLater(() -> mainStageHolder.changeRoot(mainSceneController.getRoot()));
-            mainSceneController.getController().setUserName(userData.getLogin() + " "
-                    + userData.getFirstName() + " " + userData.getLastName());
+            userContextHolder.putUser(userData);
+            mainSceneController.getController().initMenuAfterSuccessfulLogin();
         }, (t) -> {
             WebClientLogger.logError("Error during retrieving user data", t);
             logoutService.logout();
