@@ -1,8 +1,8 @@
-package com.kapusta.webapp.security.service;
+package com.kapusta.webapp.security;
 
 import com.kapusta.webapp.security.entity.User;
 
-public interface UserAuthenticationService {
+interface UserAuthenticationService {
 
     String login(String username, String password);
 

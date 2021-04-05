@@ -15,7 +15,7 @@ import java.io.IOException;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
-public class TokenAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
+class TokenAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
     private static final String BEARER = "Bearer";
 
     TokenAuthenticationFilter(final RequestMatcher requiresAuth) {

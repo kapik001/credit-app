@@ -1,8 +1,8 @@
-package com.kapusta.webapp.security.service;
+package com.kapusta.webapp.security;
 
 import java.util.Map;
 
-public interface TokenService {
+interface TokenService {
     String permanent(Map<String, String> attributes);
 
     String expiring(Map<String, String> attributes);

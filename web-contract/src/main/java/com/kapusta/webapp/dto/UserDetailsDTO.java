@@ -1,12 +1,14 @@
 package com.kapusta.webapp.dto;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 public class UserDetailsDTO implements Serializable {
     private String login;
     private String firstName;
     private String lastName;
     private String email;
+    private Collection<String> privileges;
 
     public String getLogin() {
         return login;
@@ -40,4 +42,11 @@ public class UserDetailsDTO implements Serializable {
         this.email = email;
     }
 
+    public Collection<String> getPrivileges() {
+        return privileges;
+    }
+
+    public void setPrivileges(Collection<String> privileges) {
+        this.privileges = privileges;
+    }
 }

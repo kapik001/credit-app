@@ -1,4 +1,4 @@
-package com.kapusta.webapp.security.service;
+package com.kapusta.webapp.security;
 
 import com.kapusta.webapp.security.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 
 @Service
-public class UserAuthenticationServiceImpl implements UserAuthenticationService {
+class UserAuthenticationServiceImpl implements UserAuthenticationService {
 
     private static final String USER_KEY = "username";
 

@@ -1,4 +1,4 @@
-package com.kapusta.webapp.security.service;
+package com.kapusta.webapp.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class TokenAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
+class TokenAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
     @Autowired
     private UserAuthenticationService auth;

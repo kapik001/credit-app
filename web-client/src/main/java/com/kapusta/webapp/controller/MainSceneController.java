@@ -38,6 +38,7 @@ public class MainSceneController {
                 + userData.getFirstName() + " " + userData.getLastName();
         Platform.runLater(() -> {
             this.userName.setText(uName);
+            leftNavMenuControllerHolder.getController().initLeftNavMenuController();
             borderPane.setLeft(leftNavMenuControllerHolder.getRoot());
         });
 

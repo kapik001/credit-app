@@ -1,6 +1,7 @@
 package com.kapusta.webapp.security.entity;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
@@ -10,18 +11,23 @@ public class User implements UserDetails {
 
     private String login;
     private String password;
+    private Collection<Role> roles;
     private UserPrivateData userPrivateData;
+    private Collection<SimpleGrantedAuthority> grantedAuthorities;
 
     public User(String login, String password, UserPrivateData userPrivateData) {
         this.login = login;
         this.password = password;
         this.userPrivateData = userPrivateData;
+        this.grantedAuthorities = new ArrayList<>();
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return new ArrayList<>();
+    public Collection<SimpleGrantedAuthority> getAuthorities() {
+        return grantedAuthorities;
     }
+
+
 
     @Override
     public String getPassword() {
@@ -61,7 +67,13 @@ public class User implements UserDetails {
         this.login = login;
     }
 
+    public Collection<Role> getRoles() {
+        return roles;
+    }
 
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
+    }
 
     public void setPassword(String password) {
         this.password = password;

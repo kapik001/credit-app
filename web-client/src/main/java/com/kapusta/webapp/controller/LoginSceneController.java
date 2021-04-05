@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -55,4 +56,10 @@ public class LoginSceneController {
         });
     }
 
+    @FXML
+    private void onKeyPressed(KeyEvent keyEvent) {
+        if (keyEvent.getCode().getCode() == 10){
+            this.login();
+        }
+    }
 }

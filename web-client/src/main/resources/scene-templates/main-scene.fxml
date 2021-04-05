@@ -1,47 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-      <BorderPane fx:id="borderPane">
+      <BorderPane fx:id="borderPane" prefHeight="1080.0" prefWidth="1570.0">
+         <center>
+              <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../stylesheets/menu-dropdown-style.css" BorderPane.alignment="CENTER" />
+         </center>
+         <left>
+            <Pane prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </left>
          <top>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="38.0" prefWidth="1980.0" style="-fx-background-color: CadetBlue;" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="45.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label fx:id="userName" contentDisplay="RIGHT" layoutX="14.0" layoutY="10.0" prefHeight="20.0" prefWidth="372.0" textAlignment="RIGHT" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <MenuButton layoutX="1500.0" layoutY="2.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" stylesheets="@../stylesheets/menu-dropdown-style.css" textAlignment="RIGHT" textFill="WHITE">
-                    <items>
-                      <MenuItem mnemonicParsing="false" onAction="#logoutClicked" text="LOGOUT" />
-                    </items>
-                     <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <Pane layoutX="219.0" layoutY="-6.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="46.0" prefWidth="1505.0" style="-fx-background-color: CadetBlue;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label fx:id="userName" contentDisplay="RIGHT" layoutX="14.0" layoutY="10.0" prefHeight="20.0" prefWidth="372.0" textAlignment="RIGHT" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="1517.0" layoutY="-2.0" prefHeight="48.0" prefWidth="65.0" style="-fx-background-color: CadetBlue;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="33.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../graphics/house.png" />
                            </image>
                         </ImageView>
-                     </graphic>
-                  </MenuButton>
+                        <MenuButton layoutX="27.0" layoutY="9.0" mnemonicParsing="false" opacity="0.0" prefHeight="28.0" prefWidth="9.0" stylesheets="@../stylesheets/menu-dropdown-style.css" textAlignment="RIGHT" textFill="WHITE">
+                           <items>
+                              <MenuItem mnemonicParsing="false" onAction="#logoutClicked" text="LOGOUT" />
+                           </items>
+                           <padding>
+                              <Insets right="1.0" />
+                           </padding>
+                        </MenuButton>
+                     </children>
+                  </Pane>
                </children>
-            </Pane>
+            </AnchorPane>
          </top>
-         <center>
-              <Pane prefHeight="540.0" prefWidth="761.0" stylesheets="@../stylesheets/menu-dropdown-style.css" BorderPane.alignment="CENTER" />
-         </center>
-         <left>
-            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-         </left>
       </BorderPane>
     </children>
 </HBox>

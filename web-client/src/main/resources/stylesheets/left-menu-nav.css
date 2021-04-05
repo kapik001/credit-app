@@ -17,17 +17,17 @@
 }
 
 .menu-button {
-    -fx-background-color: -fx-my-menu-color-option;
+    -fx-background-color: -fx-my-menu-color;
     -fx-background-radius: 0 2 2 0, 0 1 1 0;
 }
 
-.menu-button:hover, .menu-button:focused {
+.menu-button:hover {
         -fx-background-color: -fx-my-menu-color-option-focused;
         -fx-background-insets: 0 0 -1 0, 0;
         -fx-background-radius: 3, 3;
 }
 
-.menu-button:hover label, .menu-button:focused label {
+.menu-button:hover label {
         -fx-background-color: -fx-my-menu-color-option-focused;
 
 }

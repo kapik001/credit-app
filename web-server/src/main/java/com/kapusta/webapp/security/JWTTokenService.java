@@ -1,11 +1,10 @@
-package com.kapusta.webapp.security.service;
+package com.kapusta.webapp.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.impl.compression.GzipCompressionCodec;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 import java.security.Key;
@@ -16,7 +15,7 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 @Service
-public class JWTTokenService implements Clock, TokenService {
+class JWTTokenService implements Clock, TokenService {
 
     private static final GzipCompressionCodec COMPRESSION_CODEC = new GzipCompressionCodec();
     private static final String SIGN_ALGORITHM = "HmacSHA256";

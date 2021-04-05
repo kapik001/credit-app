@@ -1,6 +1,8 @@
 package com.kapusta.webapp.security.entity;
 
-public class UserPrivateData {
+import java.io.Serializable;
+
+public class UserPrivateData implements Serializable {
     private String firstName;
     private String lastName;
     private String email;
