@@ -1,8 +1,10 @@
 package com.kapusta.webapp.service;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import javafx.application.Platform;
 
+@Singleton
 public class LogoutServiceImpl implements LogoutService{
 
     @Inject

@@ -13,10 +13,10 @@
          <children>
             <VBox fx:id="vBoxMenu">
                <children>
-                  <MenuButton fx:id="cardSimulationMenu" mnemonicParsing="false" popupSide="RIGHT" prefHeight="30.0" prefWidth="199.0" stylesheets="@../stylesheets/left-menu-nav.css" text="CARD SIMULATION" textFill="WHITE">
+                  <MenuButton fx:id="loanRequestMenu" mnemonicParsing="false" popupSide="RIGHT" prefHeight="30.0" prefWidth="199.0" stylesheets="@../stylesheets/left-menu-nav.css" text="LOAN REQUEST" textFill="WHITE">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Action 1" />
-                        <MenuItem mnemonicParsing="false" text="Action 2" />
+                        <MenuItem mnemonicParsing="false" onAction="#newLoanRequest" text="New request" />
+                        <MenuItem mnemonicParsing="false" text="Requests list" />
                      </items>
                      <font>
                         <Font name="System Bold" size="17.0" />
@@ -24,17 +24,7 @@
                   </MenuButton>
                   <MenuButton fx:id="adminPanelMenu" mnemonicParsing="false" popupSide="RIGHT" prefHeight="30.0" prefWidth="199.0" stylesheets="@../stylesheets/left-menu-nav.css" text="ADMIN PANEL" textFill="WHITE">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Action 1" />
-                        <MenuItem mnemonicParsing="false" text="Action 2" />
-                     </items>
-                     <font>
-                        <Font name="System Bold" size="17.0" />
-                     </font>
-                  </MenuButton>
-                  <MenuButton fx:id="adminPanelMenu1" mnemonicParsing="false" popupSide="RIGHT" prefHeight="30.0" prefWidth="199.0" stylesheets="@../stylesheets/left-menu-nav.css" text="TEST PANEL" textFill="WHITE">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="Action 1" />
-                        <MenuItem mnemonicParsing="false" text="Action 2" />
+                        <MenuItem mnemonicParsing="false" text="Users management" />
                      </items>
                      <font>
                         <Font name="System Bold" size="17.0" />

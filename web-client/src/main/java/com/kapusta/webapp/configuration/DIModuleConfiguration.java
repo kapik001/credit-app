@@ -8,6 +8,7 @@ import com.google.inject.spi.InjectionListener;
 import com.google.inject.spi.TypeEncounter;
 import com.google.inject.spi.TypeListener;
 import com.kapusta.webapp.controller.LeftNavMenuController;
+import com.kapusta.webapp.controller.LoanRequestController;
 import com.kapusta.webapp.controller.LoginSceneController;
 import com.kapusta.webapp.controller.MainSceneController;
 import com.kapusta.webapp.fxmlutils.FXMLHolder;
@@ -46,6 +47,7 @@ public class DIModuleConfiguration extends AbstractModule {
         bind(ResourceGenerator.class).to(ResourceGeneratorImpl.class);
         bind(LogoutService.class).to(LogoutServiceImpl.class);
         bind(UserContextHolder.class).to(UserContextHolderImpl.class);
+        bind(LeftNavMenuService.class).to(LeftNavMenuServiceImpl.class);
     }
 
     private void bindControllerDependencies() {
@@ -55,6 +57,8 @@ public class DIModuleConfiguration extends AbstractModule {
         }).toProvider(MainSceneControllerProvider.class).in(new SingletonScope());
         bind(new TypeLiteral<FXMLHolder<LeftNavMenuController>>() {
         }).toProvider(LeftNavMenuControllerProvider.class).in(new SingletonScope());
+        bind(new TypeLiteral<FXMLHolder<LoanRequestController>>(){
+        }).toProvider(LoanRequestControllerProvider.class).in(new SingletonScope());
     }
 
     private void bindListeners() {

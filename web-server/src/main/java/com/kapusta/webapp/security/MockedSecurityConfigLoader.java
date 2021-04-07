@@ -34,7 +34,7 @@ class MockedSecurityConfigLoader implements
         if (alreadySetup)
             return;
         Privilege cardSimulationPrivilege
-                = createPrivilegeIfNotFound("CARD_SIMULATION");
+                = createPrivilegeIfNotFound("LOAN_REQUEST");
         Privilege adminTabPrivilege
                 = createPrivilegeIfNotFound("ADMIN_TAB");
 

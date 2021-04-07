@@ -1,13 +1,16 @@
 package com.kapusta.webapp.service;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.kapusta.webapp.controller.MainSceneController;
 import com.kapusta.webapp.fxmlutils.FXMLHolder;
 import com.kapusta.webapp.rest.clients.UserClient;
 import com.kapusta.webapp.utils.WebClientLogger;
 import javafx.application.Platform;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+@Singleton
 public class MainSceneServiceImpl implements MainSceneService {
 
     @Inject
@@ -34,6 +37,9 @@ public class MainSceneServiceImpl implements MainSceneService {
             WebClientLogger.logError("Error during retrieving user data", t);
             logoutService.logout();
         });
+    }
 
+    public void setCenterRoot(Parent root){
+        this.mainSceneController.getController().setCenterRoot(root);
     }
 }

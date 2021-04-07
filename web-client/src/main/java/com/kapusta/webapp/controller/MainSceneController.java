@@ -9,6 +9,7 @@ import com.kapusta.webapp.service.LogoutService;
 import com.kapusta.webapp.service.UserContextHolder;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -38,10 +39,16 @@ public class MainSceneController {
                 + userData.getFirstName() + " " + userData.getLastName();
         Platform.runLater(() -> {
             this.userName.setText(uName);
-            leftNavMenuControllerHolder.getController().initLeftNavMenuController();
-            borderPane.setLeft(leftNavMenuControllerHolder.getRoot());
+            this.leftNavMenuControllerHolder.getController().initLeftNavMenuController();
+            this.borderPane.setLeft(leftNavMenuControllerHolder.getRoot());
         });
 
+    }
+
+    public void setCenterRoot(Parent root) {
+        Platform.runLater(() -> {
+            this.borderPane.setCenter(root);
+        });
     }
 
     @FXML

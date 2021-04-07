@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.kapusta.webapp.dto.UserDetailsDTO;
 import com.kapusta.webapp.fxmlutils.PresentedBy;
+import com.kapusta.webapp.service.LeftNavMenuService;
 import com.kapusta.webapp.service.UserContextHolder;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -19,28 +20,35 @@ public class LeftNavMenuController {
     @Inject
     private UserContextHolder userContextHolder;
 
+    @Inject
+    private LeftNavMenuService leftNavMenuService;
+
     @FXML
     private MenuButton adminPanelMenu;
 
     @FXML
-    private MenuButton cardSimulationMenu;
+    private MenuButton loanRequestMenu;
 
     @FXML
     private VBox vBoxMenu;
 
     public void initLeftNavMenuController() {
-
         this.reset();
         UserDetailsDTO userDetails = userContextHolder.getUser();
 
         if (userDetails != null) {
-            if (userDetails.getPrivileges().stream().noneMatch("CARD_SIMULATION"::equals)) {
-                hideEntry(cardSimulationMenu);
+            if (userDetails.getPrivileges().stream().noneMatch("LOAN_REQUEST"::equals)) {
+                hideEntry(loanRequestMenu);
             }
             if (userDetails.getPrivileges().stream().noneMatch("ADMIN_TAB"::equals)) {
                 hideEntry(adminPanelMenu);
             }
         }
+    }
+
+    @FXML
+    public void newLoanRequest(){
+        this.leftNavMenuService.newLoanRequest();
     }
 
     private void hideEntry(MenuButton menuButton) {
@@ -58,9 +66,9 @@ public class LeftNavMenuController {
     }
 
     private void reset() {
-        hideEntry(cardSimulationMenu);
+        hideEntry(loanRequestMenu);
         hideEntry(adminPanelMenu);
-        showEntry(cardSimulationMenu);
+        showEntry(loanRequestMenu);
         showEntry(adminPanelMenu);
 
     }
